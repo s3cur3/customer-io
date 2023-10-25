@@ -32,8 +32,9 @@ defmodule CustomerIo.MixProject do
 
   defp deps do
     [
-      # {:oapi_generator, "0.1.0-rc.3", only: :dev, runtime: false},
-      {:oapi_generator, path: "../open-api-generator/", only: :dev, runtime: false},
+      # Take my patch to allow discriminator without mapping
+      {:oapi_generator,
+       git: "https://github.com/s3cur3/open-api-generator.git", only: :dev, runtime: false},
 
       # Code quality
       {:credo, "~> 1.7.0", only: [:dev, :test], runtime: false},
