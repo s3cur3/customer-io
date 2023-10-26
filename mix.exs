@@ -33,9 +33,14 @@ defmodule CustomerIo.MixProject do
   defp deps do
     [
       {:ex_doc, "~> 0.27", only: :dev, runtime: false},
+      {:telemetry, "~> 0.4.2 or ~> 1.0"},
       # Take my patch to allow discriminator without mapping
       {:oapi_generator,
        git: "https://github.com/s3cur3/open-api-generator.git", only: :dev, runtime: false},
+
+      # HTTP stack
+      {:jason, "~> 1.0"},
+      {:httpoison, "~> 1.7 or ~> 2.0"},
 
       # Code quality
       {:credo, "~> 1.7.0", only: [:dev, :test], runtime: false},
