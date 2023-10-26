@@ -32,6 +32,7 @@ defmodule CustomerIo.MixProject do
 
   defp deps do
     [
+      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       # Take my patch to allow discriminator without mapping
       {:oapi_generator,
        git: "https://github.com/s3cur3/open-api-generator.git", only: :dev, runtime: false},
