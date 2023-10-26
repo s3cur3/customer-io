@@ -31,6 +31,15 @@ config :customer_io,
   api_base_url: "https://api.customer.io", # Or "http://localhost:3000", etc.
 ```
 
+In test environments, you can skip making any real HTTP requests and always get an `:ok` response by setting your API keys to `"test"`:
+
+```elixir
+config :customer_io,
+  site_id: "test",
+  track_api_key: "test",
+  app_api_key: "test",
+```
+
 ## Contributing
 
 To regenerate the API from the latest OpenAPI spec:

@@ -21,9 +21,13 @@ defmodule CustomerIo.Track.Client do
 
     :telemetry.span([:customer_io, :request], metadata, fn ->
       out =
-        case HTTPoison.request(method, base_url <> path, body, headers(), opts) do
-          {:ok, response} -> process_response(response, info.response)
+        with token when token != "test" <- auth_token(),
+             headers <- headers(token),
+             {:ok, resp} <- HTTPoison.request(method, base_url <> path, body, headers, opts) do
+          process_response(resp, info.response)
+        else
           {:error, error} -> {:error, %{source: "Customer.io HTTP", error: error, request: info}}
+          "test" -> :ok
         end
 
       {out, %{}}
@@ -45,8 +49,8 @@ defmodule CustomerIo.Track.Client do
   defp status_code_to_ok_or_error(status) when status < 400, do: :ok
   defp status_code_to_ok_or_error(_), do: :error
 
-  defp headers do
-    [{"Content-Type", "application/json"}, {"authorization", auth_token()}]
+  defp headers(token) do
+    [{"Content-Type", "application/json"}, {"authorization", token}]
   end
 
   defp auth_token do
@@ -60,7 +64,11 @@ defmodule CustomerIo.Track.Client do
         _ -> raise ":site_id and :track_api_key must be non-empty"
       end
 
-    bearer_token = Base.encode64("#{site_id}:#{api_key}")
-    "Basic #{bearer_token}"
+    if api_key == "test" do
+      api_key
+    else
+      bearer_token = Base.encode64("#{site_id}:#{api_key}")
+      "Basic #{bearer_token}"
+    end
   end
 end
