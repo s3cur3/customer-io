@@ -25,8 +25,7 @@ defmodule CustomerIo.Track do
       iex> user = %User{id: 123, email: "jdoe@hotmail.com", name: "J. Doe"}
       iex> CustomerIo.Track.identify(user, %{email: user.email, name: user.name})
   """
-  @spec identify(user_id() | %{id: user_id()}, map(), Keyword.t()) ::
-          :ok | {:error, CustomerIo.Error.t()}
+  @spec identify(user_id() | %{id: user_id()}, map(), Keyword.t()) :: :ok | :error
   def identify(user_struct_or_id, user_attributes \\ %{}, opts \\ [])
   def identify(%{id: user_id}, user_attrs, opts), do: identify(user_id, user_attrs, opts)
 
