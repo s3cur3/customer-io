@@ -33,3 +33,21 @@ defmodule CustomerIo.Track do
     TrackCustomers.identify(to_string(user_id), user_attrs, opts)
   end
 end
+
+require Protocol
+Protocol.derive(Jason.Encoder, CustomerIo.Track.CioId)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.Delivery)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.Email)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.Id)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.IdentifyByEmail)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.IdentifyById)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.InApp)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.InviteEvent)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.MobileScreenView)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.PageView)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.Push)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.Slack)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.Sms)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.StandardAnonymousEvent)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.StandardEvent)
+Protocol.derive(Jason.Encoder, CustomerIo.Track.Webhook)
